@@ -1,7 +1,13 @@
 import { getLocalMediaFName } from '../utils/obj-functions'
 
+export const chInBook = 21
+
 export const versesPerCh = [
   51,25,36,54,47,71,52,59,41,42,57,50,38,31,27,33,26,40,42,31,25
+]
+
+export const verseSumCh = [
+  51,76,112,166,213,284,336,395,436,478,535,585,623,654,681,714,740,780,822,853,878
 ]
 
 export const imgAlt = {
@@ -61,263 +67,181 @@ export const imgVerseSpan = {
 }
 
 export const chSelectedImgList = [
-  "1v14",
-  "2v3",
-  "3v2",
-  "4v37",
-  "5v2",
-  "6v36",
-  "7v28",
-  "8v2b",
-  "9v11b",
-  "10v2",
-  "11v38b-39a",
-  "12v2b",
-  "13v18",
-  "14v20",
-  "15v15a",
-  "16v25",
-  "17v14",
-  "18v24",
-  "19v10",
-  "20v17b",
-  "21v15b"
+  "1v14","2v3","3v2","4v37","5v2","6v36","7v28","8v2b","9v11b",
+  "10v2","11v38b-39a","12v2b","13v18","14v20","15v15a","16v25",
+  "17v14","18v24","19v10","20v17b","21v15b"
 ]
 
-export const chInBook = 21
 export const getChNode = (inx,title) => {
   return (inx < chInBook)
    ? {title, image: getLocalMediaFName("../john-pics/VB-John" + chSelectedImgList[inx] + ".jpg")}
     : undefined
 }
 
-export const johnOutline = [
-  "1-1","1-19","1-29","1-35","1-43","2-1","2-13","3-1","3-22","4-1","4-27","4-39","4-43",
-  "5-1","5-16","5-31","6-1","6-16","6-25","6-60","7-1","7-14","7-25","7-45",
-  "8-12","8-21","8-31","8-48","9-1","9-13","9-35","10-1","10-22",
-  "11-1","11-17","11-38","11-45","12-1","12-12","12-20","12-37","13-1","13-18","13-31",
-  "14-1","14-5","14-15","15-1","15-18","15-26","16-16","17-1","17-6","17-20",
-  "18-1","18-15","18-19","18-25","18-28","19-1","19-16","19-28","19-38",
-  "20-1","20-11","20-19","20-24","20-30","21-1","21-15"
-]
-
-export const gospelOfJohnObj = {
-  "fileList": [{
-    "id": 0,
-    "title": "John1",
-    "descr": "John1Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John1ImgId"
-    }
-  }, {
-    "id": 1,
-    "title": "John2",
-    "descr": "John2Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John2ImgId"
-    }
-  }, {
-    "id": 2,
-    "title": "John3",
-    "descr": "John3Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John3ImgId"
-    }
-  }, {
-    "id": 3,
-    "title": "John4",
-    "descr": "John4Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John4ImgId"
-    }
-  }, {
-    "id": 4,
-    "title": "John5",
-    "descr": "John5Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John5ImgId"
-    }
-  }, {
-    "id": 5,
-    "title": "John6",
-    "descr": "John6Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John6ImgId"
-    }
-  }, {
-    "id": 6,
-    "title": "John7",
-    "descr": "John7Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John7ImgId"
-    }
-  }, {
-    "id": 7,
-    "title": "John8",
-    "descr": "John8Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John8ImgId"
-    }
-  }, {
-    "id": 8,
-    "title": "John9",
-    "descr": "John9Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John9ImgId"
-    }
-  }, {
-    "id": 9,
-    "title": "John10",
-    "descr": "John10Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John10ImgId"
-    }
-  }, {
-    "id": 10,
-    "title": "John11",
-    "descr": "John11Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John11ImgId"
-    }
-  }, {
-    "id": 11,
-    "title": "John12",
-    "descr": "John12Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John12ImgId"
-    }
-  }, {
-    "id": 12,
-    "title": "John13",
-    "descr": "John13Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John13ImgId"
-    }
-  }, {
-    "id": 13,
-    "title": "John14",
-    "descr": "John14Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John14ImgId"
-    }
-  }, {
-    "id": 14,
-    "title": "John15",
-    "descr": "John15Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John15ImgId"
-    }
-  }, {
-    "id": 15,
-    "title": "John16",
-    "descr": "John16Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John16ImgId"
-    }
-  }, {
-    "id": 16,
-    "title": "John17",
-    "descr": "John17Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John17ImgId"
-    }
-  }, {
-    "id": 17,
-    "title": "John18",
-    "descr": "John18Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John18ImgId"
-    }
-  }, {
-    "id": 18,
-    "title": "John19",
-    "descr": "John19Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John19ImgId"
-    }
-  }, {
-    "id": 19,
-    "title": "John20",
-    "descr": "John20Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John20ImgId"
-    }
-  }, {
-    "id": 20,
-    "title": "John21",
-    "descr": "John21Descr",
-    "image": {
-      "origin": "ImgId",
-      "filename": "John21ImgId"
-    }
-  }],
-  "title": "John",
-  "description": "JohnDescr",
-  "image": {
-    "origin": "ImgId",
-    "filename": "JohnImgId"
-  },
-  "language": "eng",
-  "mediaType": "vid"
+export const johnOutlineStruct = {
+  1: [1,19,29,35,43],
+  2: [1,13],
+  3: [1,22],
+  4: [1,27,39,43],
+  5: [1,16,31],
+  6: [1,16,25,60],
+  7: [1,14,25,45],
+  8: [12,21,31,48],
+  9: [1,13,35],
+  10: [1,22],
+  11: [1,17,38,45],
+  12: [1,12,20,37],
+  13: [1,18,31],
+  14: [1,5,15],
+  15: [1,18,26],
+  16: [16],
+  17: [1,6,20],
+  18: [1,15,19,25,28],
+  19: [1,16,28,38],
+  20: [1,11,19,24,30],
+  21: [1,15]
 }
 
-/*
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
-"1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18","1:19"
+export const johnOutlineTitle = {
+  1: ["1:1-18","1:19-28","1:29-34","1:35-42","1:43-51"],
+  2: ["2:1-12","2:13-25"],
+  3: ["3:1-21","3:22-36"],
+  4: ["4:1-26","4:27-38","4:39-42","4:43-54"],
+  5: ["5:1-15","5:16-30","5:31-47"],
+  6: ["6:1-15","6:16-24","6:25-59","6:60-71"],
+  7: ["7:1-13","7:14-24","7:25-44","7:45-8:11"],
+  8: ["8:12-20","8:21-30","8:31-47","8:48-59"],
+  9: ["9:1-12","9:13-34","9:35-41"],
+  10: ["10:1-21","10:22-42"],
+  11: ["11:1-16","11:17-37","11:38-44","11:45-57"],
+  12: ["12:1-11","12:12-19","12:20-36","12:37-50"],
+  13: ["13:1-17","13:18-30","13:31-38"],
+  14: ["14:1-4","14:5-14","14:15-31"],
+  15: ["15:1-17","15:18-25","15:26-16:15"],
+  16: ["16:16-33"],
+  17: ["17:1-5","17:6-19","17:20-26"],
+  18: ["18:1-14","18:15-18","18:19-24","18:25-27","18:28-40"],
+  19: ["19:1-15","19:16-27","19:28-37","19:38-42"],
+  20: ["20:1-10","20:11-18","20:19-23","20:24-29","20:30-31"],
+  21: ["21:1-14","21:15-25"]
+}
 
-"John-1-1": "The Word became flesh",
-"John-1-19": "John the Baptist denies being the Messiah",
-"John-1-29": "John testifies about Jesus",
-"John-1-35": "John’s disciples follow Jesus",
-"John-1-43": "Jesus calls Philip and Nathanael",
-
-*/
-export const johnVerseList = [
-  "1:1-18 The Word became flesh","1:1","1:2","1:3","1:4","1:5","1:6","1:7","1:8",
-  "1:9","1:10","1:11","1:12","1:13","1:14","1:15","1:16","1:17","1:18",
-  "1:19-28 John the Baptist denies being the Messiah",
-  "1:29-34 John testifies about Jesus",
-  "1:35-42 John’s disciples follow Jesus",
-  "1:43-51 Jesus calls Philip and Nathanael","*2-1","*2-13","*3-1","*3-22","*4-1","*4-27","*4-39","*4-43",
-  "5-1","*5-16","*5-31","*6-1","*6-16","*6-25","*6-60","*7-1","*7-14","*7-25","*7-45",
-  "8-12","*8-21","*8-31","*8-48","*9-1","*9-13","*9-35","*10-1","*10-22",
-  "11-1","*11-17","*11-38","*11-45","*12-1","*12-12","*12-20","*12-37","*13-1","*13-18","*13-31",
-  "14-1","*14-5","*14-15","*15-1","*15-18","*15-26","*16-16","*17-1","*17-6","*17-20",
-  "18-1","*18-15","*18-19","*18-25","*18-28","*19-1","*19-16","*19-28","*19-38",
-  "20-1","*20-11","*20-19","*20-24","*20-30","*21-1","*21-15"
+export const johnOutlineBegEndList = [
+  {begin: {ch: 1, v: 1}, end: {ch: 1, v: 18}},
+  {begin: {ch: 1, v: 19}, end: {ch: 1, v: 28}},
+  {begin: {ch: 1, v: 29}, end: {ch: 1, v: 34}},
+  {begin: {ch: 1, v: 35}, end: {ch: 1, v: 42}},
+  {begin: {ch: 1, v: 43}, end: {ch: 1, v: 51}},
+  {begin: {ch: 2, v: 1}, end: {ch: 2, v: 12}},
+  {begin: {ch: 2, v: 13}, end: {ch: 2, v: 25}},
+  {begin: {ch: 3, v: 1}, end: {ch: 3, v: 21}},
+  {begin: {ch: 3, v: 22}, end: {ch: 3, v: 36}},
+  {begin: {ch: 4, v: 1}, end: {ch: 4, v: 26}},
+  {begin: {ch: 4, v: 27}, end: {ch: 4, v: 38}},
+  {begin: {ch: 4, v: 39}, end: {ch: 4, v: 42}},
+  {begin: {ch: 4, v: 43}, end: {ch: 4, v: 54}},
+  {begin: {ch: 5, v: 1}, end: {ch: 5, v: 15}},
+  {begin: {ch: 5, v: 16}, end: {ch: 5, v: 30}},
+  {begin: {ch: 5, v: 31}, end: {ch: 5, v: 47}},
+  {begin: {ch: 6, v: 1}, end: {ch: 6, v: 15}},
+  {begin: {ch: 6, v: 16}, end: {ch: 6, v: 24}},
+  {begin: {ch: 6, v: 25}, end: {ch: 6, v: 59}},
+  {begin: {ch: 6, v: 60}, end: {ch: 6, v: 71}},
+  {begin: {ch: 7, v: 1}, end: {ch: 7, v: 13}},
+  {begin: {ch: 7, v: 14}, end: {ch: 7, v: 24}},
+  {begin: {ch: 7, v: 25}, end: {ch: 7, v: 44}},
+  {begin: {ch: 7, v: 45}, end: {ch: 8, v: 11}},
+  {begin: {ch: 8, v: 12}, end: {ch: 8, v: 20}},
+  {begin: {ch: 8, v: 21}, end: {ch: 8, v: 30}},
+  {begin: {ch: 8, v: 31}, end: {ch: 8, v: 47}},
+  {begin: {ch: 8, v: 48}, end: {ch: 8, v: 59}},
+  {begin: {ch: 9, v: 1}, end: {ch: 9, v: 12}},
+  {begin: {ch: 9, v: 13}, end: {ch: 9, v: 34}},
+  {begin: {ch: 9, v: 35}, end: {ch: 9, v: 41}},
+  {begin: {ch: 10, v: 1}, end: {ch: 10, v: 21}},
+  {begin: {ch: 10, v: 22}, end: {ch: 10, v: 42}},
+  {begin: {ch: 11, v: 1}, end: {ch: 11, v: 16}},
+  {begin: {ch: 11, v: 17}, end: {ch: 11, v: 37}},
+  {begin: {ch: 11, v: 38}, end: {ch: 11, v: 44}},
+  {begin: {ch: 11, v: 45}, end: {ch: 11, v: 57}},
+  {begin: {ch: 12, v: 1}, end: {ch: 12, v: 11}},
+  {begin: {ch: 12, v: 12}, end: {ch: 12, v: 19}},
+  {begin: {ch: 12, v: 20}, end: {ch: 12, v: 36}},
+  {begin: {ch: 12, v: 37}, end: {ch: 12, v: 50}},
+  {begin: {ch: 13, v: 1}, end: {ch: 13, v: 17}},
+  {begin: {ch: 13, v: 18}, end: {ch: 13, v: 30}},
+  {begin: {ch: 13, v: 31}, end: {ch: 13, v: 38}},
+  {begin: {ch: 14, v: 1}, end: {ch: 14, v: 4}},
+  {begin: {ch: 14, v: 5}, end: {ch: 14, v: 14}},
+  {begin: {ch: 14, v: 15}, end: {ch: 14, v: 31}},
+  {begin: {ch: 15, v: 1}, end: {ch: 15, v: 17}},
+  {begin: {ch: 15, v: 18}, end: {ch: 15, v: 25}},
+  {begin: {ch: 15, v: 26}, end: {ch: 16, v: 15}},
+  {begin: {ch: 16, v: 16}, end: {ch: 16, v: 33}},
+  {begin: {ch: 17, v: 1}, end: {ch: 17, v: 5}},
+  {begin: {ch: 17, v: 6}, end: {ch: 17, v: 19}},
+  {begin: {ch: 17, v: 20}, end: {ch: 17, v: 26}},
+  {begin: {ch: 18, v: 1}, end: {ch: 18, v: 14}},
+  {begin: {ch: 18, v: 15}, end: {ch: 18, v: 18}},
+  {begin: {ch: 18, v: 19}, end: {ch: 18, v: 24}},
+  {begin: {ch: 18, v: 25}, end: {ch: 18, v: 27}},
+  {begin: {ch: 18, v: 28}, end: {ch: 18, v: 40}},
+  {begin: {ch: 19, v: 1}, end: {ch: 19, v: 15}},
+  {begin: {ch: 19, v: 16}, end: {ch: 19, v: 27}},
+  {begin: {ch: 19, v: 28}, end: {ch: 19, v: 37}},
+  {begin: {ch: 19, v: 38}, end: {ch: 19, v: 42}},
+  {begin: {ch: 20, v: 1}, end: {ch: 20, v: 10}},
+  {begin: {ch: 20, v: 11}, end: {ch: 20, v: 18}},
+  {begin: {ch: 20, v: 19}, end: {ch: 20, v: 23}},
+  {begin: {ch: 20, v: 24}, end: {ch: 20, v: 29}},
+  {begin: {ch: 20, v: 30}, end: {ch: 20, v: 31}},
+  {begin: {ch: 21, v: 1}, end: {ch: 21, v: 14}},
+  {begin: {ch: 21, v: 15}, end: {ch: 21, v: 25}}
 ]
 
-/*
-const validVerseList = {
-  let tempList = []
-  versesPerCh.map((val,inx) => {
-    tempList
-  }
-  return tempList
+export const johnOutlineTitleList = johnOutlineBegEndList.map((obj) => {
+  const b=obj.begin
+  const e=obj.end
+  return (b.ch===e.ch) ? `${b.ch}:${b.v}-${e.v}` : `${b.ch}:${b.v}-${e.ch}:${e.v}`
 })
-*/
+
+export const getOutlineOptions = (t) => {
+  const vDelim = t("ChVerseDelimiter")
+  const chList = [...Array(chInBook).keys()].map((val,inx) => {
+    const ch = inx+1
+    const tKey = `John.${ch}`
+    return {
+      key: `${ch}`,
+      begin: {ch, v: 1},
+      end: {ch, v: versesPerCh[inx]},
+      label: t("Chapter")+` ${ch} - ${t(tKey)}`
+    }
+  })
+  const outlineList = johnOutlineBegEndList.map((obj,inx) => {
+    const key = obj.begin.ch+vDelim+obj.begin.v
+    const tKey = "John."+obj.begin.ch+"."+obj.begin.v
+    const label = key+" "+t(tKey)
+    return { ...obj, key, label }
+  })
+  return [...outlineList, ...chList]
+}
+
+export const gospelOfJohnObj = {
+  fileList: [...Array(chInBook).keys()].map((val,inx) => ({
+    id: inx,
+    title: `John.${inx+1}`,
+    descr: `John.${inx+1}.Descr`,
+    image: {
+      origin: "ImgId",
+      filename: `John.${inx+1}.ImgId`
+    }
+  })),
+  title: "John",
+  description: "John.Descr",
+  image: {
+    origin: "ImgId",
+    filename: "John.ImgId"
+  },
+  language: "eng",
+  mediaType: "vid"
+}

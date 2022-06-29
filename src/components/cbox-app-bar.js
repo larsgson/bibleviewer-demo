@@ -1,21 +1,12 @@
 import React from 'react'
-import makeStyles from '@mui/styles/makeStyles'
 import AppBar from '@mui/material/AppBar'
-import BibleRefAutocomplete from './bible-ref-autocomplete'
 import Toolbar from '@mui/material/Toolbar'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
 import Typography from '@mui/material/Typography'
-import { useTranslation } from 'react-i18next'
-import { johnVerseList } from '../constants/naviChaptersJohn'
+import Grid from '@mui/material/Grid'
+import PassagesAutocomplete from './passages-autocomplete'
 
 const CBoxAppBar = (props) =>  {
   const { largeScreen } = props
-  const [beginVal, setBeginVal] = React.useState(johnVerseList[0])
-  const [beginInputVal, setBeginInputVal] = React.useState('')
-  const [endVal, setEndVal] = React.useState(johnVerseList[22])
-  const [endInputVal, setEndInputVal] = React.useState('')
   return (
   <AppBar
     sx={{ background: 'transparent', boxShadow: 'none'}}
@@ -42,26 +33,7 @@ const CBoxAppBar = (props) =>  {
           </Typography>
         </Grid>
         <Grid item>
-          <BibleRefAutocomplete
-            value={beginVal}
-            inputValue={beginInputVal}
-            options={johnVerseList}
-            label="Begin"
-            onLeftIconButtonClick={(ev) => props.onLeftIconButtonClick(ev,"begin",beginVal)}
-            onChange={(ev, newValue) => setBeginVal(newValue)}
-            onInputChange={(ev, newInputValue) => setBeginInputVal(newInputValue)}
-          />
-        </Grid>
-        <Grid item>
-          <BibleRefAutocomplete
-            value={endVal}
-            inputValue={endInputVal}
-            options={johnVerseList}
-            label="End"
-            onLeftIconButtonClick={(ev) => props.onLeftIconButtonClick(ev,"end",beginVal)}
-            onChange={(ev, newValue) => setEndVal(newValue)}
-            onInputChange={(ev, newInputValue) => setEndInputVal(newInputValue)}
-          />
+          <PassagesAutocomplete/>
         </Grid>
       </Grid>
     </Toolbar>

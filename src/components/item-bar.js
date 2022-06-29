@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import makeStyles from '@mui/styles/makeStyles'
 import ImageListItemBar from '@mui/material/ImageListItemBar'
 import LinearProgress from '@mui/material/LinearProgress'
-import BibleReference, { useBibleReference, ReferenceSelector } from "bible-reference-rcl"
 
 const useStyles = makeStyles(theme => ({
   titleBar: {
@@ -42,23 +41,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const supportedBooks = [ 'jhn']
-const initialBook = "jhn"
-const initialChapter = "1"
-const initialVerse = "1"
-
-const onChange = (bookId, chapter, verse) => {
-  console.log(`\n### Reference changed to ${bookId} - ${chapter}:${verse}\n\n`)
-}
-
-const initial =
-  {
-    initialBook,
-    initialChapter,
-    initialVerse,
-    onChange
-  }
-
 const ItemProgressBar = ({classes,value}) => (
   <LinearProgress
     variant="determinate"
@@ -70,20 +52,9 @@ const ItemProgressBar = ({classes,value}) => (
     value={value}/>
 )
 
-/*
-<BibleReference
-  status={state}
-  actions={actions}
-/>
-*/
-
 const ItemBar = ({title, hideTitle, descr, bkgrd, percentVal, onClick}) => {
   const classes = useStyles()
   const useTitle = !hideTitle || (percentVal>0)
-  const {state, actions} = useBibleReference(initial)
-  useEffect(() => {
-    actions.applyBooksFilter(supportedBooks)
-  }, [])
   return (
     <ImageListItemBar
       title={useTitle?title:""}

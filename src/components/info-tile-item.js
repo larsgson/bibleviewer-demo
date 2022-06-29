@@ -59,30 +59,20 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickClose,
       />
       <div className={classes.infoTileContent}>
         <div className={classes.infoTileLeft}>
-          <Typography sx={{pt: 1.5,fontWeight: 600,fontSize: '110%',width: '100%'}}>{t(item.title)}</Typography>
+          <Typography
+            sx={{ml: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%',width: '100%'}}
+          >
+            {t(item.title)}
+          </Typography>
           {(item && item.fileList && item.fileList.length>1) && (<IconButton
-            sx={{color: 'white',backgroundColor: 'darkgrey',float:'right'}}
+            sx={{color: 'white',backgroundColor: '#242424',float:'right'}}
             onClick={(e) => onClickExpand(e)}
             size="large">
               {expandIcon}
           </IconButton>)}
           {expanded && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(item.description)}/></Typography>}
-          {curEp && <Typography sx={{pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
+          {curEp && <Typography sx={{ml: 0.5, pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
           {curEp && curEp.descr && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(curEp.descr)}/></Typography>}
-          <Fab
-            sx={{color: 'darkblue',backgroundColor: 'darkgrey'}}
-            onClick={(e) => onClickPlay(e)}
-          >
-            <PlayArrow/>
-          </Fab>
-          {item && (<Fab
-            onClick={(e) => onClickMenuBookIcon(e)}
-            sx={{color: 'darkblue',backgroundColor: 'darkgrey'}}
-            aria-label="MenuBookIcon"
-            className={classes.actionButton}
-          >
-            <MenuBookIcon/>
-          </Fab>)}
           <div className={classes.filler}/>
         </div>
       </div>

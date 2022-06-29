@@ -13,6 +13,8 @@ import ItemBarEpisode from './item-bar-episode'
 import useBrowserData from '../hooks/useBrowserData'
 import useMediaPlayer from "../hooks/useMediaPlayer"
 import { useTranslation } from 'react-i18next'
+import { verseSec } from '../constants/TimeCodes'
+import { verseSumCh } from '../constants/naviChaptersJohn'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -151,6 +153,8 @@ const EpList = (props) => {
   const handleClickItemIndex = (ev,item,ep) => {
     ev.stopPropagation()
     if (startPlay!=null) {
+      ep.begTimeSec = verseSec[((ep.id>0)?verseSumCh[ep.id-1] : 0)]
+      ep.endTimeSec = verseSec[verseSumCh[ep.id]]
       startPlay(0,item,ep)
     }
   }

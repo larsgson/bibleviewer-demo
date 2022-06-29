@@ -7,7 +7,6 @@ import Dialog from '@mui/material/Dialog'
 import useMediaPlayer from "../hooks/useMediaPlayer"
 import useBrowserData from '../hooks/useBrowserData'
 import { apiObjGetStorage, apiObjSetStorage } from '../utils/api'
-import { timeCodes } from '../constants/TimeCodes'
 import { getLocalMediaFName, isEmptyObj, pad } from '../utils/obj-functions'
 
 let styles = {
@@ -139,8 +138,7 @@ const Footer = () => {
       } else {
 //        restorePos(curPlay)
         if (curEp!=null){
-          const checkObj = timeCodes[curEp.id+1][1]
-          const msVal = ((((checkObj.hour  *60) +checkObj.minutes) *60) +checkObj.seconds) *1000
+          const msVal = curEp.begTimeSec * 1000
           setStartPos(msVal)
           setCurMsPos(msVal)
         }
@@ -229,12 +227,16 @@ console.log("handleSetPaused")
 
   const handleVideoProgress = (pos) => {
     const posMSec = pos.playedSeconds *1000
-    storePos(posMSec)
-    setCurMsPos(posMSec)
-    setCurPos(posMSec)
-    if (onPlaying){
-      const cur = {position: posMSec, duration: curDur}
-      onPlaying(cur)
+    if (pos.playedSeconds>curEp.endTimeSec){
+      closeFooter()
+    } else {
+      storePos(posMSec)
+      setCurMsPos(posMSec)
+      setCurPos(posMSec)
+      if (onPlaying){
+        const cur = {position: posMSec, duration: curDur}
+        onPlaying(cur)
+      }
     }
   }
 
