@@ -54,13 +54,11 @@ export const getImgOfObj = (ser,t) => {
         retStr = getLocalImgFName(ser.image.urls.raw,"small")
       } else if ((ser.image.origin==="YT")||((ser.image.origin==="icon"))){
         const checkFile = (ser.fileList!=null) ? ser.fileList[0].filename : ser.filename
-        let image = "https://yt3.ggpht.com/ytc/AKedOLSb55w3lhdoQVUmQ9oeKQQR9Z_N3iDl8M233Nz3XA=s88-c-k-c0x00ffffff-no-rj"
-        if (true) {
-          const checkRegEx = /^.*https:\/\/.*youtube.com\/watch\?v=(.*)$/
-          const matches = checkFile.match(checkRegEx)
-          if ((matches!=null)&&(matches.length>0)) {
-            image = "https://img.youtube.com/vi/" + matches[1] + "/mqdefault.jpg"
-          }
+        let image = ""
+        const checkRegEx = /^.*https:\/\/.*youtube.com\/watch\?v=(.*)$/
+        const matches = checkFile.match(checkRegEx)
+        if ((matches!=null)&&(matches.length>0)) {
+          image = "https://img.youtube.com/vi/" + matches[1] + "/mqdefault.jpg"
         }
         retStr = image
       } else if((ser.image.origin==="Local")

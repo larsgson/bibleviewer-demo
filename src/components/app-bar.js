@@ -5,9 +5,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import PassagesAutocomplete from './passages-autocomplete'
 
-const CBoxAppBar = (props) =>  {
-  const { largeScreen } = props
-  return (
+const CustomAppBar = () =>  (
   <AppBar
     sx={{ background: 'transparent', boxShadow: 'none'}}
   >
@@ -38,21 +36,6 @@ const CBoxAppBar = (props) =>  {
       </Grid>
     </Toolbar>
   </AppBar>
-  )
-}
+)
 
-/*
-onClick={(e) => props.onClickMenuBookIcon(e)}
-
-const useStyles = makeStyles(theme => ({
-  logo: {
-    height: 54,
-  },
-  logoSmall: {
-    paddingTop: 10,
-    height: 28,
-  },
-
-*/
-
-export default CBoxAppBar
+export default CustomAppBar

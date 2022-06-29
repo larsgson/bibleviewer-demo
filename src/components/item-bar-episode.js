@@ -25,7 +25,7 @@ const ItemBarEpisode = ({serie, episode, title, descr, useIcon, bkgrd, onClick})
     }
     return () => didCancel = true
   },[serie,episode])
-  const handleClick = (ev, idStr) => {
+  const handleClick = (ev) => {
     const resetPosMargin = 10000 // Reset playing to begining if less mSec remains
     ev.stopPropagation()
     if (onClick!=null) {

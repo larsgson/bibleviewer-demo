@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import makeStyles from '@mui/styles/makeStyles';
 import useBrowserData from '../hooks/useBrowserData'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   playerWrapper: {
     position: 'relative',
     paddingTop: '56.25%'
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CboxVideoPlayer = (props) => {
+const VideoPlayer = (props) => {
   const classes = useStyles()
   const [startPos, setStartPos] = useState(0)
   const {width, height} = useBrowserData()
@@ -73,4 +73,4 @@ const CboxVideoPlayer = (props) => {
   )
 }
 
-export default CboxVideoPlayer
+export default VideoPlayer

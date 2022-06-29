@@ -1,7 +1,5 @@
 import React, {useState,useEffect} from 'react'
 import EpList from './ep-list'
-import ItemImage from './item-image'
-import ItemBar from './item-bar'
 import InfoTileItem from './info-tile-item'
 import { getImgOfObj } from '../utils/obj-functions'
 import { apiObjGetStorage } from '../utils/api'
@@ -10,7 +8,7 @@ import useMediaPlayer from "../hooks/useMediaPlayer"
 import { useTranslation } from 'react-i18next'
 
 const TileItem = (props) => {
-  const {item,infoTile,epList,expanded,mTop} = props
+  const {item,epList,expanded,mTop} = props
   const {width, height} = useBrowserData()
   const {curPlay} = useMediaPlayer()
   const { t } = useTranslation()
@@ -68,38 +66,18 @@ const TileItem = (props) => {
     }
   }, [item,curPlay])
   return (
-  <div onClick={(e) => (!infoTile) && props.onClickPlay(e)}>
-    {!infoTile && (
-      <ItemImage
-        item={item}
-        curEp={serieCurEp}
-        onClick={(e) => props.onClickPlay(e)}
-        width={"100%"}
-        float={"left"}
-        mTop={mTop}
-      />
-    )}
-    {infoTile ? (
-      <InfoTileItem
-        item={item}
-        curEp={serieCurEp}
-        mTop={mTop}
-        expanded={expanded}
-        onClickClose={(e) => props.onClickClose(e)}
-        onClickMenuBookIcon={(e) => props.onClickMenuBookIcon(e)}
-        onClickPlay={(e) => props.onClickPlay(e)}
-        onClickExpand={(e) => props.onClickExpand(e)}
-      />
-    ) : (
-      <ItemBar
-        title={t(item.title)}
-        hideTitle={item.hideTitle}
-        descr={epDescr}
-        percentVal={percentVal}
-        bkgrd={"rgb(128 203 204 / 78%)"}/>
-    )}
-    {infoTile && epList
-    && (<EpList
+  <div>
+    <InfoTileItem
+      item={item}
+      curEp={serieCurEp}
+      mTop={mTop}
+      expanded={expanded}
+      onClickClose={(e) => props.onClickClose(e)}
+      onClickMenuBookIcon={(e) => props.onClickMenuBookIcon(e)}
+      onClickPlay={(e) => props.onClickPlay(e)}
+      onClickExpand={(e) => props.onClickExpand(e)}
+    />
+    <EpList
       epList={epList}
       multiRow
       onClick={(ev,ser,ep) => console.log(ep)}
@@ -107,7 +85,7 @@ const TileItem = (props) => {
       isPaused={false}
       useHeight={height}
       width={width}
-      imgSrc={getImgOfObj(item,t)}/>)}
+      imgSrc={getImgOfObj(item,t)}/>
   </div>
   )
 }

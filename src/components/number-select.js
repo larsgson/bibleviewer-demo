@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useSelect } from '@mui/base'
 import { styled } from '@mui/system'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -7,15 +6,11 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogActions from '@mui/material/DialogActions'
 import Typography from '@mui/material/Typography'
-import { useTranslation } from 'react-i18next'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#333333',
@@ -26,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const NumberSelect = ({prompt,label,start,end,value,onChange,onClose}) => {
-  const [hasFocus, setHasFocus] = React.useState(false)
   const [open, setOpen] = React.useState(false)
   React.useEffect(() => setOpen(open || !value), [value])
 
@@ -46,8 +40,6 @@ const NumberSelect = ({prompt,label,start,end,value,onChange,onClose}) => {
     <React.Fragment>
       <FormControl
         sx={{ m: 1, minWidth: 75 }}
-        onFocus={()=>setHasFocus(true)}
-        onBlur={()=>setHasFocus(false)}
         onMouseDown={()=>setOpen(true)}
       >
         <InputLabel id="number-select-label">{label}</InputLabel>

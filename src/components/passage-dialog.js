@@ -1,41 +1,22 @@
 import React from 'react'
-import CheckIcon from '@mui/icons-material/Check'
-import CloseIcon from '@mui/icons-material/Close'
 import Button from '@mui/material/Button'
-import Badge from '@mui/material/Badge'
 import IconButton from '@mui/material/IconButton'
-import Icon from '@mui/material/Icon'
-import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import Divider from '@mui/material/Divider'
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogActions from '@mui/material/DialogActions'
-import InputAdornment from '@mui/material/InputAdornment'
-import InputLabel from '@mui/material/InputLabel'
-import OutlinedInput from '@mui/material/OutlinedInput'
 import TextField from '@mui/material/TextField'
-import FormControl from '@mui/material/FormControl'
-import Chip from '@mui/material/Chip'
-import InputBase from '@mui/material/InputBase'
-import SearchIcon from '@mui/icons-material/Search'
-import DirectionsIcon from '@mui/icons-material/Directions'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
 import PlayArrow from '@mui/icons-material/PlayArrow'
 import Typography from '@mui/material/Typography'
 import NumberSelect from './number-select'
 import { useTranslation } from 'react-i18next'
 import useMediaPlayer from "../hooks/useMediaPlayer"
-import { getOutlineOptions, chInBook, versesPerCh } from '../constants/naviChaptersJohn'
+import { chInBook, versesPerCh } from '../constants/naviChaptersJohn'
 import { gospelOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
 import { verseSec } from '../constants/TimeCodes'
 
 const PassageDialog = (props) => {
-  const {open,title,directPlay,onClose,onSubmit,onChange} = props
+  const {open,title,directPlay,onClose} = props
   const [value, setValue] = React.useState(undefined)
   const [begCh,setBegCh] = React.useState(undefined)
   const [begV,setBegV] = React.useState(undefined)
@@ -60,13 +41,6 @@ const PassageDialog = (props) => {
     onClose && onClose()
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    setValue([...value,{...dialogValue}])
-    handleClose()
-    onSubmit && onSubmit(dialogValue)
-  }
-
   const handleChange = (event) => {
     setDialogValue({
       ...dialogValue,
@@ -87,9 +61,7 @@ const PassageDialog = (props) => {
     setEndV(newEndCh ? undefined : versesPerCh[val-1])
   }
 
-  const handleAdd = () => {
-    console.log("add")
-  }
+  const handleAdd = () => console.log("add")
 
   const handlePlay = () => {
     if ((startPlay!=null) && (begCh) && (begV)) {
@@ -133,8 +105,8 @@ const PassageDialog = (props) => {
             <Grid container spacing={1} sx={{paddingTop: '15px'}}>
               <Grid item key="begCh">
                 <NumberSelect
-                  prompt="Begin chapter"
-                  label="Chapter"
+                  prompt={t("BeginCh")}
+                  label={t("Chapter")}
                   start={1}
                   end={chInBook}
                   value={begCh}
@@ -143,8 +115,8 @@ const PassageDialog = (props) => {
               </Grid>
               {begCh && (<Grid item key="begV">
                 <NumberSelect
-                  prompt="Begin verse"
-                  label="Verse"
+                  prompt={t("BeginV")}
+                  label={t("Verse")}
                   start={1}
                   end={versesPerCh[begCh-1]}
                   value={begV}
@@ -167,8 +139,8 @@ const PassageDialog = (props) => {
             {begV && (<Grid container spacing={1} sx={{paddingTop: '15px'}}>
               <Grid item key="endCh">
                 <NumberSelect
-                  prompt="End chapter"
-                  label="Chapter"
+                  prompt={t("EndCh")}
+                  label={t("Chapter")}
                   start={begCh??1}
                   end={chInBook}
                   value={endCh}
@@ -177,8 +149,8 @@ const PassageDialog = (props) => {
               </Grid>
               {endCh && (<Grid item key="endV">
                 <NumberSelect
-                  prompt="End verse"
-                  label="Verse"
+                  prompt={t("EndV")}
+                  label={t("Verse")}
                   start={(endCh==begCh) ? begV : 1}
                   end={versesPerCh[endCh-1]}
                   value={endV}

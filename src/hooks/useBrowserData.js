@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { BrowserDataContext } from "../browser-data-context"
 
 const useBrowserData = () => {
-  const [state, setState ] = useContext(BrowserDataContext)
+  const [state, ] = useContext(BrowserDataContext)
   return {...state}
 }
 

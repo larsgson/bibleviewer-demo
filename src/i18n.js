@@ -28,6 +28,10 @@ i18n
         translation: {
           "ChVerseDelimiter":	":",
           "Chapter":	"Chapter",
+          "BeginCh":	"Begin Chapter",
+          "BeginV":	"Begin Verse",
+          "EndCh":	"End Chapter",
+          "EndV":	"End Verse",
           "Verse":	"Verse",
           "John":	"Gospel of John",
           "John.ImgId": "img/john-pics/VB-John1v14.jpg",

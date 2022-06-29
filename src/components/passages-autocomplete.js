@@ -1,57 +1,24 @@
-import React, { useState } from 'react'
-import { useAutocomplete } from '@mui/base/AutocompleteUnstyled'
+import React from 'react'
 import { loadCSS } from 'fg-loadcss'
-import Autocomplete,
-  {createFilterOptions, autocompleteClasses } from '@mui/material/Autocomplete'
-import { styled } from '@mui/material/styles'
-import CheckIcon from '@mui/icons-material/Check'
-import CloseIcon from '@mui/icons-material/Close'
-import Button from '@mui/material/Button'
+import Autocomplete, {createFilterOptions } from '@mui/material/Autocomplete'
 import Badge from '@mui/material/Badge'
 import IconButton from '@mui/material/IconButton'
 import Icon from '@mui/material/Icon'
-import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Grid'
-import Divider from '@mui/material/Divider'
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
 import InputAdornment from '@mui/material/InputAdornment'
-import InputLabel from '@mui/material/InputLabel'
-import OutlinedInput from '@mui/material/OutlinedInput'
 import TextField from '@mui/material/TextField'
-import FormControl from '@mui/material/FormControl'
 import Chip from '@mui/material/Chip'
-import InputBase from '@mui/material/InputBase'
-import SearchIcon from '@mui/icons-material/Search'
-import DirectionsIcon from '@mui/icons-material/Directions'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import PlayArrow from '@mui/icons-material/PlayArrow'
-import Typography from '@mui/material/Typography'
 import PassageDialog from './passage-dialog'
 import { useTranslation } from 'react-i18next'
 import useMediaPlayer from "../hooks/useMediaPlayer"
-import { getOutlineOptions, chInBook, versesPerCh } from '../constants/naviChaptersJohn'
+import { getOutlineOptions } from '../constants/naviChaptersJohn'
 import { gospelOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
 import { verseSec } from '../constants/TimeCodes'
 
-
-const Input = styled('input')(({ theme }) => ({
-  width: 200,
-  backgroundColor: theme.palette.background.paper,
-  color: theme.palette.getContrastText(theme.palette.background.paper),
-}))
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#333333',
-  ...theme.typography.h8,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color:  '#FFFFFF',
-}))
-
 const filter = createFilterOptions()
 
-const PassagesAutocomplete = (props) => {
+const PassagesAutocomplete = () => {
   const [value, setValue] = React.useState([])
   const [open, setOpen] = React.useState(false)
   const [hasFocus, setHasFocus] = React.useState(false)
@@ -73,7 +40,7 @@ const PassagesAutocomplete = (props) => {
     }
   }, [])
 
-  const handlePlay = (event) => {
+  const handlePlay = () => {
 //    const sortedPassages = value.sort((a, b) => a.key.localeCompare(b.key))
     if ((startPlay!=null) && (value.length>0)) {
       const begCh = value[0].begin.ch
@@ -93,9 +60,7 @@ const PassagesAutocomplete = (props) => {
     setOpen(true)
   }
 
-  const handleSubmit = (ev, value) => {
-    console.log(value)
-  }
+  const handleSubmit = (ev, value) => console.log(value)
 
   return (
     <React.Fragment>
@@ -184,7 +149,7 @@ const PassagesAutocomplete = (props) => {
                     sx={{height: 22}}
                     position="start">
                     <IconButton
-                      onClick={(ev) => openDialog("")}
+                      onClick={() => openDialog("")}
                       sx={{ p: '10px' }}
                       aria-label="menu"
                     >

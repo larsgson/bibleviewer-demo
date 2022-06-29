@@ -1,39 +1,12 @@
 import React from 'react'
-import makeStyles from '@mui/styles/makeStyles'
-import { spacing } from '@mui/system'
-import PlayArrow from '@mui/icons-material/PlayArrow'
 import Typography from '@mui/material/Typography'
-import Fab from '@mui/material/Fab'
-import MenuBookIcon from '@mui/icons-material/MenuBook'
-import LeftIcon from '@mui/icons-material/KeyboardBackspace'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import ItemImage from './item-image'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import { useTranslation } from 'react-i18next'
-
-const useStyles = makeStyles(theme => ({
-  iconButton: {
-  },
-  actionButton: {
-    color: 'white',
-    backgroundColor: 'darkgrey',
-  },
-  buttonPlay: {
-    margin: 20,
-    zIndex: 100,
-  },
-  infoImage: {
-    height: 230,
-    float: 'right',
-  },
-  infoTileContent: {
-    position: 'relative',
-    width: '100%',
-  },
-  infoTileLeft: {
-  },
-}))
 
 const NewlineText = ({text}) => text.split('\n').map((line,i) => (
   <span key={i}>
@@ -42,42 +15,44 @@ const NewlineText = ({text}) => text.split('\n').map((line,i) => (
   </span>
 ))
 
-const InfoTileItem = ({item,curEp,expanded,mTop,onClickClose,
-                        onClickMenuBookIcon,onClickPlay,onClickExpand}) => {
+const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
   const { t } = useTranslation()
-  const classes = useStyles()
   const expandIcon = expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>
   return (
-    <div>
-      <ItemImage
-        item={item}
-        curEp={curEp}
-        onClick={(e) => onClickPlay(e)}
-        width={"100%"}
-        float={"left"}
-        mTop={mTop}
-      />
-      <div className={classes.infoTileContent}>
-        <div className={classes.infoTileLeft}>
+    <Box>
+      <Grid container alignItems="center" spacing={2} sx={{paddingTop: '15px'}}>
+        <Grid item>
+          <ItemImage
+            item={item}
+            curEp={curEp}
+            onClick={(e) => onClickPlay(e)}
+            width={"100%"}
+            float={"left"}
+            mTop={mTop}
+          />
+        </Grid>
+        <Grid item>
           <Typography
             sx={{ml: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%',width: '100%'}}
           >
             {t(item.title)}
           </Typography>
+        </Grid>
+        <Grid item>
           {(item && item.fileList && item.fileList.length>1) && (<IconButton
-            sx={{color: 'white',backgroundColor: '#242424',float:'right'}}
+            sx={{color: 'white',backgroundColor: '#242424'}}
             onClick={(e) => onClickExpand(e)}
             size="large">
               {expandIcon}
           </IconButton>)}
-          {expanded && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(item.description)}/></Typography>}
-          {curEp && <Typography sx={{ml: 0.5, pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
-          {curEp && curEp.descr && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(curEp.descr)}/></Typography>}
-          <div className={classes.filler}/>
-        </div>
-      </div>
-    </div>
-  );
+        </Grid>
+      </Grid>
+      {expanded && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(item.description)}/></Typography>}
+      {curEp && <Typography sx={{ml: 0.5, pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
+      {curEp && curEp.descr && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(curEp.descr)}/></Typography>}
+      <div/>
+    </Box>
+  )
 }
 
 export default InfoTileItem

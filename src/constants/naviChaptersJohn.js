@@ -217,7 +217,7 @@ export const getOutlineOptions = (t) => {
       label: t("Chapter")+` ${ch} - ${t(tKey)}`
     }
   })
-  const outlineList = johnOutlineBegEndList.map((obj,inx) => {
+  const outlineList = johnOutlineBegEndList.map((obj) => {
     const key = obj.begin.ch+vDelim+obj.begin.v
     const tKey = "John."+obj.begin.ch+"."+obj.begin.v
     const label = key+" "+t(tKey)
