@@ -18,6 +18,13 @@ const TileItem = (props) => {
   const [curEpInx,setCurEpInx] = useState(undefined)
   const [epDescr, setEpDescr] = useState(undefined)
   useEffect(() => {
+    // Initial default
+    setPercentVal(0)
+console.log(percentVal)
+    setEpDescr("")
+console.log(epDescr)
+  }, [])
+  useEffect(() => {
     if (nbrOfEp!=null && curEpInx!=null) {
       setPercentVal((curEpInx>0)? curEpInx*100/nbrOfEp : undefined)
     }
@@ -39,7 +46,7 @@ const TileItem = (props) => {
     let didCancel = false
     if (item){
 // ToDo: Change this to use the "id" field here instead of the "title"
-      if (curPlay && (curPlay.curSerie.title===item.title) && (curPlay.curEp!=null)){
+      if (curPlay && (curPlay.curSerie) && (curPlay.curSerie.title===item.title) && (curPlay.curEp!=null)){
         setSerieCurEp(curPlay.curEp)
       } else {
         if (item.fileList!=null) {

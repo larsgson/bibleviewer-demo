@@ -4,10 +4,7 @@ import NavClose from '@mui/icons-material/Close'
 import VideoPlayer from './video'
 import useMediaPlayer from "../hooks/useMediaPlayer"
 import useBrowserData from '../hooks/useBrowserData'
-import {
-//  apiObjGetStorage,
-  apiObjSetStorage
-} from '../utils/api'
+import {apiObjGetStorage,apiObjSetStorage} from '../utils/api'
 
 let styles = {
   floatingButton: {
@@ -78,39 +75,31 @@ const Footer = () => {
   const [curMsPos, setCurMsPos] = useState(undefined)
   const [curDur, setCurDur] = useState()
   const storePos = (msPos) => apiObjSetStorage(curPlay,"mSec",msPos)
-/*
-  const restorePos = async (obj) => {
-    await apiObjGetStorage(obj,"mSec").then((value) => {
-      if (value==null){
-        value=0
-      }
-      if ((obj!=null)&&(obj.curSerie!=null)&&(obj.curSerie.fileList!=null)
-          &&(obj.curEp!=null)&&((obj.curSerie.fileList.length-1)===obj.curEp.id)){
-        apiObjGetStorage(obj,"mSecDur").then((dur) => {
-          const marginSec = 3 // minimum sec for play - else repeat from beginning
-          if (value+(marginSec*1000)>dur){
-            value = 0
+
+  useEffect(() => {
+    let didCancel = false
+    const restorePos = async (obj) => {
+      await apiObjGetStorage(obj,"mSec").then((value) => {
+        if (value==null) {
+          if ((obj.curSerie!=null) && (obj.curEp!=null)) {
+            value = curEp.begTimeSec * 1000
+          } else {
+            value=0
           }
+        }
+        if (!didCancel) {
           setStartPos(value)
           setCurMsPos(value)
-        })
-      } else {
-        setStartPos(value)
-        setCurMsPos(value)
-      }
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
-*/
-  useEffect(() => {
-    if (curPlay!=null){
-      if (curEp!=null){
-        const msVal = curEp.begTimeSec * 1000
-        setStartPos(msVal)
-        setCurMsPos(msVal)
-      }
+        }
+      }).catch((err) => console.error(err))
+      await apiObjGetStorage(obj,"mSecDur").then((dur) => {
+        if (!didCancel) setCurDur(dur)
+      }).catch((err) => console.error(err))
     }
+    if ((curSerie!=null) && (curEp!=null)){
+      restorePos({curSerie, curEp})
+    }
+    return () => didCancel = true
   },[curPlay,curEp])
 
   const closeFooter = () => {
@@ -215,7 +204,6 @@ console.log(curMsPos)
        </footer>
     )
   }
-
 }
 
 export const MediaPlayer = (props) => {
@@ -244,6 +232,7 @@ console.log(cur)
       }
     }
     if (props.onPlaying) props.onPlaying({position: cur.position, duration: cur.duration})
+console.log(cur)
     setCurPos(cur)
   }
 

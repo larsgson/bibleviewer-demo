@@ -28,6 +28,7 @@ i18n
         translation: {
           "ChVerseDelimiter":	":",
           "Chapter":	"Chapter",
+          "newPassage": "New Passage",
           "BeginCh":	"Begin Chapter",
           "BeginV":	"Begin Verse",
           "EndCh":	"End Chapter",

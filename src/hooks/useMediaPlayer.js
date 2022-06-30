@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import { MediaPlayerContext } from "../media-player-context"
+import { MediaPlayerContext } from "../context/media-player-context"
 
 const useMediaPlayer = () => {
-  const [state, setState, handlerFunctions ] = useContext(MediaPlayerContext)
+  const {state,actions} = useContext(MediaPlayerContext)
   return {
-     ...state,
-     ...handlerFunctions
-   }
+    ...state,
+    ...actions
+  }
 }
 
 export default useMediaPlayer

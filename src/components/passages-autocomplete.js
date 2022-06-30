@@ -12,23 +12,27 @@ import PlayArrow from '@mui/icons-material/PlayArrow'
 import PassageDialog from './passage-dialog'
 import { useTranslation } from 'react-i18next'
 import useMediaPlayer from "../hooks/useMediaPlayer"
+import useLocalStorage from "../hooks/useLocalStorage"
 import { getOutlineOptions } from '../constants/naviChaptersJohn'
-import { gospelOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
+import { outlinesOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
 import { verseSec } from '../constants/TimeCodes'
 
 const filter = createFilterOptions()
 
-const PassagesAutocomplete = () => {
-  const [value, setValue] = React.useState([])
+const PassagesAutocomplete = (props) => {
+  const [value, setValue] = useLocalStorage("curPassageList",[])
   const [open, setOpen] = React.useState(false)
   const [hasFocus, setHasFocus] = React.useState(false)
   const [directPlay, setDirectPlay] = React.useState(false)
   const [dialogTitle, setDialogTitle] = React.useState("")
+  const textInput = React.useRef(null)
   const { t } = useTranslation()
   const options = getOutlineOptions(t)
-  const { startPlay } = useMediaPlayer()
+  const {startPlay} = useMediaPlayer()
 
   React.useEffect(() => {
+    // Set the focus initially
+    setTimeout(() => {textInput.current.focus()}, 100)
     const node = loadCSS(
       'https://use.fontawesome.com/releases/v5.14.0/css/all.css',
       // Inject before JSS
@@ -43,14 +47,17 @@ const PassagesAutocomplete = () => {
   const handlePlay = () => {
 //    const sortedPassages = value.sort((a, b) => a.key.localeCompare(b.key))
     if ((startPlay!=null) && (value.length>0)) {
-      const begCh = value[0].begin.ch
-      const tmpEp = gospelOfJohnObj.fileList[begCh-1]
-      const begVerseNbr = ((begCh>1)?verseSumCh[begCh-2] : 0) + value[0].begin.v -1
-      const endCh = value[0].end.ch
-      const endVerseNbr = ((endCh>1)?verseSumCh[endCh-2] : 0) + value[0].end.v
+      const curEntry = {...value[0]}
+      const tmpSerie = outlinesOfJohnObj(curEntry)
+      const tmpEp = tmpSerie.fileList[0]
+      const begCh = curEntry.begin.ch
+      const begVerseNbr = ((begCh>1)?verseSumCh[begCh-2] : 0) + curEntry.begin.v -1
+      const endCh = curEntry.end.ch
+      const endVerseNbr = ((endCh>1)?verseSumCh[endCh-2] : 0) + curEntry.end.v
       tmpEp.begTimeSec = verseSec[begVerseNbr]
       tmpEp.endTimeSec = verseSec[endVerseNbr]
-      startPlay(0,gospelOfJohnObj,tmpEp)
+      startPlay(0,tmpSerie,tmpEp)
+      setValue(value.slice(1,value.length))
     }
   }
 
@@ -60,11 +67,14 @@ const PassagesAutocomplete = () => {
     setOpen(true)
   }
 
-  const handleSubmit = (ev, value) => console.log(value)
+  const handleSubmit = (entry) => {
+    value.push(entry)
+  }
 
   return (
     <React.Fragment>
       <Autocomplete
+        {...props}
         size="small"
         variant="standard"
         multiple
@@ -141,6 +151,7 @@ const PassagesAutocomplete = () => {
           <TextField
             {...params}
             label="Passages"
+            inputRef={textInput}
             InputProps={{
               ...params.InputProps,
               startAdornment: (

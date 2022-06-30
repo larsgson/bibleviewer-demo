@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { BrowserDataContext } from "../browser-data-context"
+import { BrowserDataContext } from "../context/browser-data-context"
 
 const useBrowserData = () => {
   const [state, ] = useContext(BrowserDataContext)

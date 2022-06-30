@@ -12,11 +12,11 @@ import NumberSelect from './number-select'
 import { useTranslation } from 'react-i18next'
 import useMediaPlayer from "../hooks/useMediaPlayer"
 import { chInBook, versesPerCh } from '../constants/naviChaptersJohn'
-import { gospelOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
+import { outlinesOfJohnObj, verseSumCh } from '../constants/naviChaptersJohn'
 import { verseSec } from '../constants/TimeCodes'
 
 const PassageDialog = (props) => {
-  const {open,title,directPlay,onClose} = props
+  const {open,title,directPlay,onClose,onSubmit} = props
   const [value, setValue] = React.useState(undefined)
   const [begCh,setBegCh] = React.useState(undefined)
   const [begV,setBegV] = React.useState(undefined)
@@ -27,25 +27,12 @@ const PassageDialog = (props) => {
 
   React.useEffect(() => setValue(title), [title])
 
-  const [dialogValue, setDialogValue] = React.useState({
-    dTitle: "",
-    begin: {ch: undefined,v: undefined},
-    end: {ch: undefined,v: undefined}
-  })
-
   const handleClose = () => {
     setBegCh(undefined)
     setBegV(undefined)
     setEndCh(undefined)
     setEndV(undefined)
     onClose && onClose()
-  }
-
-  const handleChange = (event) => {
-    setDialogValue({
-      ...dialogValue,
-      dTitle: event.target.value,
-    })
   }
 
   const handleBegChChange = (ev,val) => {
@@ -61,18 +48,35 @@ const PassageDialog = (props) => {
     setEndV(newEndCh ? undefined : versesPerCh[val-1])
   }
 
-  const handleAdd = () => console.log("add")
+  const handleAdd = () => {
+    onSubmit && onSubmit(
+      {
+        label: value,
+        begin: {ch: begCh, v: begV},
+        end: {ch: endCh, v: endV}
+      }
+    )
+    handleClose()
+  }
 
   const handlePlay = () => {
     if ((startPlay!=null) && (begCh) && (begV)) {
-      const tmpEp = gospelOfJohnObj.fileList[begCh-1]
+      const tmpTitle = `John.${begCh}.${begV}#`
+      const tmpEntry =
+        {
+          label: tmpTitle,
+          begin: {ch: begCh, v: begV},
+          end: {ch: endCh, v: endV}
+        }
+      const tmpSerie = outlinesOfJohnObj(tmpEntry)
+      const tmpEp = tmpSerie.fileList[0]
       const beginVerseNbr = ((begCh>1)?verseSumCh[begCh-2] : 0) + begV -1
       tmpEp.begTimeSec = verseSec[beginVerseNbr]
       if ((endCh) && (endV)) {
         const endVerseNbr = ((endCh>1)?verseSumCh[endCh-2] : 0) + endV
         tmpEp.endTimeSec = verseSec[endVerseNbr]
       }
-      startPlay(0,gospelOfJohnObj,tmpEp)
+      startPlay(0,tmpSerie,tmpEp)
     }
     handleClose()
   }
@@ -85,8 +89,7 @@ const PassageDialog = (props) => {
           margin="dense"
           id="name"
           value={value}
-          onChange={handleChange}
-          label="New passage"
+          label={t("newPassage")}
           type="text"
           variant="standard"
         />)}

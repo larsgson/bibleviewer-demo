@@ -1,15 +1,15 @@
 import React, { useState  } from 'react'
-import { apiSetStorage, apiObjGetStorage, apiObjSetStorage } from './utils/api'
+import { apiSetStorage, apiObjGetStorage, apiObjSetStorage } from '../utils/api'
 import { unique } from 'shorthash'
 
 const MediaPlayerContext = React.createContext([{}, () => {}])
-const MediaPlayerProvider = ({children}) => {
+const MediaPlayerProvider = (props) => {
   const [state, setState] = useState({
-    currentTrackIndex: null,
     isPlaying: false,
   })
-  const [isPaused, setIsPaused] = useState(false)
   const setStateKeyVal = (key,val) => setState(state => ({ ...state, [key]: val }))
+
+  const [isPaused, setIsPaused] = useState(false)
 
   const togglePlay = () => {
 //    state.isPlaying ? player.pause() : player.play()
@@ -22,20 +22,22 @@ const MediaPlayerProvider = ({children}) => {
 
   const onFinishedPlaying = () => {
 console.log("onFinishedPlaying")
-    const {curSerie, curEp} = state.curPlay
-console.log(curSerie)
-    if (curSerie){
-      if ((curSerie.fileList!=null) && (curSerie.fileList.length>0)
-          && (curEp!=null)){
-        // This serie has episodes
-        let epInx = curEp.id
-        epInx+=1
-        let newPlayObj = {curSerie}
-        apiObjSetStorage(newPlayObj,"curEp",epInx)
-        if (curSerie.fileList[epInx]!=null){
-          newPlayObj.curEp=curSerie.fileList[epInx]
+    if (state.curPlay) {
+      const {curSerie, curEp} = state.curPlay
+  console.log(curSerie)
+      if (curSerie){
+        if ((curSerie.fileList!=null) && (curSerie.fileList.length>0)
+            && (curEp!=null)){
+          // This serie has episodes
+          let epInx = curEp.id
+          epInx+=1
+          let newPlayObj = {curSerie}
+          apiObjSetStorage(newPlayObj,"curEp",epInx)
+          if (curSerie.fileList[epInx]!=null){
+            newPlayObj.curEp=curSerie.fileList[epInx]
+          }
+          setStateKeyVal( "curPlay", newPlayObj)
         }
-        setStateKeyVal( "curPlay", newPlayObj)
       }
     }
   }
@@ -55,10 +57,6 @@ console.log(curSerie)
   }
 
   const startPlay = async (inx,curSerie,curEp) => {
-console.log(inx)
-console.log(curSerie)
-console.log(curEp)
-
     if (!curSerie){ // stop playing
       let newPlayObj
       setStateKeyVal( "curPlay", newPlayObj)
@@ -99,22 +97,26 @@ console.log(curEp)
     }
   }
 
-  const handlerFunctions = {
-    startPlay,
-    togglePlay,
-    onStopPlaying,
-    onPlaying,
-    onFinishedPlaying,
-    isPaused,
-    setIsPaused,
-    curPlay: state.curPlay,
-    curSerie: state.curSerie,
-    curPos: state.curPos,
-    skipToNextTrack,
+  const value = {
+    state: {
+      ...state,
+      isPaused,
+    },
+    actions: {
+      setState,
+      startPlay,
+      togglePlay,
+      onStopPlaying,
+      onPlaying,
+      onFinishedPlaying,
+      setIsPaused,
+      skipToNextTrack,
+    }
   }
+
   return (
-    <MediaPlayerContext.Provider value={[state, setState, handlerFunctions]}>
-      {children}
+    <MediaPlayerContext.Provider value={value}>
+      {props.children}
     </MediaPlayerContext.Provider>
   )
 }

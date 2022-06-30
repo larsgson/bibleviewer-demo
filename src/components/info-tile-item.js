@@ -20,7 +20,7 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
   const expandIcon = expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>
   return (
     <Box>
-      <Grid container alignItems="center" spacing={2} sx={{paddingTop: '15px'}}>
+      <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <ItemImage
             item={item}
