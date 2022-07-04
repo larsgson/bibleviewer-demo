@@ -33,7 +33,7 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
         </Grid>
         <Grid item>
           <Typography
-            sx={{ml: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%',width: '100%'}}
+            sx={{pl: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%'}}
           >
             {t(item.title)}
           </Typography>
@@ -48,7 +48,7 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
         </Grid>
       </Grid>
       {expanded && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(item.description)}/></Typography>}
-      {curEp && <Typography sx={{ml: 0.5, pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
+      {curEp && <Typography sx={{pl: 0.5, pt: 1,fontWeight: 600,fontSize: '90%'}}>{t(curEp.title)}</Typography>}
       {curEp && curEp.descr && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(curEp.descr)}/></Typography>}
       <div/>
     </Box>
