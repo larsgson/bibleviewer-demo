@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
+import PlayArrow from '@mui/icons-material/PlayArrow'
 import ItemImage from './item-image'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
@@ -20,7 +21,7 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
   const expandIcon = expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>
   return (
     <Box>
-      <Grid container alignItems="center" spacing={2} sx={{paddingTop: '15px'}}>
+      <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <ItemImage
             item={item}
@@ -33,7 +34,7 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
         </Grid>
         <Grid item>
           <Typography
-            sx={{ml: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%',width: '100%'}}
+            sx={{pl: 0.5, pt: 1.5,fontWeight: 600,fontSize: '110%'}}
           >
             {t(item.title)}
           </Typography>
@@ -41,14 +42,20 @@ const InfoTileItem = ({item,curEp,expanded,mTop,onClickPlay,onClickExpand}) => {
         <Grid item>
           {(item && item.fileList && item.fileList.length>1) && (<IconButton
             sx={{color: 'white',backgroundColor: '#242424'}}
-            onClick={(e) => onClickExpand(e)}
-            size="large">
+            onClick={(e) => onClickExpand(e)}>
               {expandIcon}
           </IconButton>)}
         </Grid>
+        <Grid item>
+          <IconButton
+            sx={{color: 'blue',backgroundColor: 'darkgrey'}}
+            onClick={(e) => onClickPlay(e)}>
+            <PlayArrow/>
+          </IconButton>
+        </Grid>
       </Grid>
       {expanded && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(item.description)}/></Typography>}
-      {curEp && <Typography sx={{ml: 0.5, pt: 1,fontWeight: 600,fontSize: '90%',width: '100%'}}>{t(curEp.title)}</Typography>}
+      {curEp && <Typography sx={{pl: 0.5, pt: 1,fontWeight: 600,fontSize: '90%'}}>{t(curEp.title)}</Typography>}
       {curEp && curEp.descr && <Typography sx={{pt: 0.5,fontWeight: 100,fontSize: '85%',width: '100%'}}><NewlineText text={t(curEp.descr)}/></Typography>}
       <div/>
     </Box>

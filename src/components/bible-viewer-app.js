@@ -3,6 +3,7 @@ import TileItem from './tile-item'
 import CustomAppBar from './app-bar'
 import { gospelOfJohnObj } from '../constants/naviChaptersJohn'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import useMediaPlayer from "../hooks/useMediaPlayer"
 
 const theme = createTheme({
   palette: {
@@ -19,15 +20,20 @@ const defaultBackgroundStyle = {
 }
 
 const BibleviewerApp = () => {
+  const { startPlay } = useMediaPlayer()
   const [showDescr,setShowDescr] = useState(false)
   const handleShowDescr = (ev,val) => {
     ev.stopPropagation()
     setShowDescr(val)
   }
-  let curObj = gospelOfJohnObj
-  const showInfo = (curObj!=null)
-  const showItem = showInfo && curObj
-  const showEpList = showItem && showItem.fileList
+  const curObj = gospelOfJohnObj
+  const handlePlay = (ev) => {
+    ev.stopPropagation()
+    if (startPlay!=null) {
+      startPlay(0,curObj)
+    }
+  }
+  const showEpList = curObj.fileList
   return (
     <div style={defaultBackgroundStyle}>
       <ThemeProvider theme={theme}>
@@ -38,6 +44,7 @@ const BibleviewerApp = () => {
           expanded={showDescr}
           infoTile={true}
           epList={showEpList}
+          onClickPlay={(e) => handlePlay(e)}
           onClickExpand={(e) => handleShowDescr(e,!showDescr)}
         />
       </ThemeProvider>

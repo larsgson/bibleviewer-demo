@@ -226,6 +226,28 @@ export const getOutlineOptions = (t) => {
   return [...outlineList, ...chList]
 }
 
+export const outlinesOfJohnObj = (entry) => {
+  return {
+    fileList: [{
+      id: entry.label,
+      title: entry.label,
+      descr: "",
+      image: {
+        origin: "ImgId",
+        filename: `John.${entry.begin.ch}.ImgId`
+      }
+    }],
+    title: "John -",
+    description: "",
+    image: {
+      origin: "ImgId",
+      filename: "John.ImgId"
+    },
+    language: "eng",
+    mediaType: "vid"
+  }
+}
+
 export const gospelOfJohnObj = {
   fileList: [...Array(chInBook).keys()].map((val,inx) => ({
     id: inx,
